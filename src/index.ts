@@ -30,23 +30,22 @@ export const handler: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
 	// Verifica se o corpo do evento não é nulo antes de analisar
 	if (!event.body || event.body === "{}") {
-        return {
-            statusCode: 400,
-            body: JSON.stringify({
-                message: "O corpo da requisição está vazio ou inválido"
-            })
-        };
-    }
+		return {
+			statusCode: 400,
+			body: JSON.stringify({
+				message: "O corpo da requisição está vazio ou inválido"
+			})
+		}
+	}
 
-    try {
-        const parsedBody = BodySchema.parse(JSON.parse(event.body));
+	try {
+		const parsedBody = BodySchema.parse(JSON.parse(event.body))
 
-        // Use parsedBody.clientCode and parsedBody.address directly
-        console.log(
-            "Atualizar no banco de dados:",
-            parsedBody.clientCode,
-            parsedBody.address
-        );
+		console.log(
+			"Atualizar no banco de dados:",
+			parsedBody.clientCode,
+			parsedBody.address
+		)
 		/*
 			// Conecta com DynamoDB para atualizar os dados
 			const params = {
